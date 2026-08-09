@@ -1,0 +1,124 @@
+/* Monster Ball Launcher — mobile portrait layout.
+ * Top 2/3: game screen (canvas). Bottom 1/3: controls —
+ * joystick left, two stacked attack buttons right.
+ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  background: #0d1119;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+#app {
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- game screen: top two thirds ---- */
+#game-area {
+  flex: 2 1 0;
+  min-height: 0;
+  position: relative;
+  background: #0d1119;
+}
+
+#game {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+}
+
+/* ---- controls: bottom third ---- */
+#controls {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 22px calc(14px + env(safe-area-inset-bottom, 0px));
+  background: #141a26;
+  border-top: 1px solid #232b3b;
+}
+
+/* joystick: left */
+#joystick-zone {
+  position: relative;
+  width: 132px;
+  height: 132px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: none;
+}
+
+#joystick-base {
+  width: 116px;
+  height: 116px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  background: radial-gradient(circle at 50% 35%, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+  box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.45);
+  position: relative;
+}
+
+#joystick-knob {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 52px;
+  height: 52px;
+  margin: -26px 0 0 -26px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #7dd3fc, #38bdf8 60%, #0ea5e9);
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.45);
+}
+
+/* attack buttons: right, stacked */
+#button-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  padding-right: env(safe-area-inset-right, 0px);
+}
+
+.atk-btn {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.35);
+  touch-action: none;
+  cursor: pointer;
+  transition: transform 0.06s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.atk-btn:active,
+.atk-btn.pressed {
+  transform: scale(0.9);
+}
+
+.atk-a {
+  background: radial-gradient(circle at 35% 30%, #ff8a8a, #ff5252 70%, #d32f2f);
+}
+
+.atk-b {
+  background: radial-gradient(circle at 35% 30%, #ffd180, #ffab40 70%, #f57c00);
+}

@@ -2,23 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#0d1119">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>Monster Ball Launcher</title>
-  <style>
-    body {
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      background: #111;
-      color: #0f0;
-      font-family: monospace;
-    }
-    h1 { font-size: 2rem; text-align: center; }
-  </style>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <h1>👾 Monster Ball Launcher</h1>
+  <div id="app">
+    <div id="game-area">
+      <canvas id="game"></canvas>
+    </div>
+    <div id="controls">
+      <div id="joystick-zone" aria-label="Movement joystick">
+        <div id="joystick-base">
+          <div id="joystick-knob"></div>
+        </div>
+      </div>
+      <div id="button-col">
+        <button id="btn-a" class="atk-btn atk-a" type="button" aria-label="Attack"></button>
+        <button id="btn-b" class="atk-btn atk-b" type="button" aria-label="Attack"></button>
+      </div>
+    </div>
+  </div>
+  <script src="js/core.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/input.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
