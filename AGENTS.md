@@ -29,6 +29,13 @@ touches.
 ## Tech decisions
 
 - **Platform:** plain HTML/JS/Canvas — no frameworks, no build step.
+- **Version footer:** `build-version.sh` (run in CI before deploy) writes
+  `js/version.js` (gitignored) with the build timestamp + first 4 chars of the
+  commit hash — e.g. `2026.08.14-21.20+7e1c` — plus the GitHub commit URL.
+  Renderer draws it small + dim at the canvas bottom-right; tapping it opens the
+  commit. Graceful if `js/version.js` is missing (no footer, no build step needed
+  for plain local serving). Re-run `bash build-version.sh` after committing to
+  refresh it locally.
 - **Testing:** headless game core (`js/core.js`, zero DOM) tested with
   `node --test test/`; `test/autoplay.js` is a headless balance probe
   (greedy kiting bot must win 8/8 with the default tuning).

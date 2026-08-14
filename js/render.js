@@ -26,9 +26,39 @@
     drawAttackSector(ctx, g);
     drawPlayer(ctx, g);
     drawHud(ctx, g);
+    drawVersion(ctx, g);
     drawParticles(ctx, fx.particles);
 
     if (g.state !== 'playing') drawOverlay(ctx, g);
+  }
+
+  // Bounding rect (in canvas logical coords) of the last-drawn version label.
+  // Used by main.js to detect taps on it. Null when the version isn't present.
+  let verRect = null;
+  function versionRect() { return verRect; }
+
+  function drawVersion(ctx, g) {
+    verRect = null;
+    const v = window.MBL_VERSION;
+    if (!v) return;
+    ctx.font = '500 10px ui-monospace, Menlo, Consolas, monospace';
+    ctx.textBaseline = 'bottom';
+    ctx.textAlign = 'right';
+    const line1 = v.string;
+    const line2 = 'tap for commit';
+    const pad = 8;
+    const w1 = ctx.measureText(line1).width;
+    const w2 = ctx.measureText(line2).width;
+    const w = Math.max(w1, w2);
+    const x = g.width - pad;
+    const y = g.height - pad;
+    const h = 16;
+    ctx.fillStyle = 'rgba(226,232,240,0.45)';
+    ctx.fillText(line1, x, y);
+    ctx.fillStyle = 'rgba(226,232,240,0.30)';
+    ctx.font = '500 8px ui-monospace, Menlo, Consolas, monospace';
+    ctx.fillText(line2, x, y - 12);
+    verRect = { x: x - w - pad, y: y - h, w: w + pad * 2, h: h + pad };
   }
 
   function drawGate(ctx, g, fx) {
@@ -180,5 +210,5 @@
     ctx.fillText('tap to play again', g.width / 2, g.height * 0.55);
   }
 
-  window.MBLRender = { draw };
+  window.MBLRender = { draw, versionRect };
 })();

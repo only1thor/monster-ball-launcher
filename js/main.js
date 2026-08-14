@@ -46,9 +46,21 @@
   }
   resize();
 
-  // tap to restart after game over
-  canvas.addEventListener('pointerdown', () => {
-    if (game && game.state !== 'playing') newGame(game.width, game.height);
+  // tap to restart after game over (or tap version link during play)
+  canvas.addEventListener('pointerdown', (ev) => {
+    if (game) {
+      const vr = window.MBLRender.versionRect();
+      if (vr && window.MBL_VERSION) {
+        const cx = ev.offsetX, cy = ev.offsetY;
+        // versionRect is in canvas logical coords; ev.offsetX/Y match when no DPR adjustment
+        // but DPR transform is set on ctx, so offsetX/Y = CSS pixels = game logical pixels.
+        if (cx >= vr.x && cx <= vr.x + vr.w && cy >= vr.y && cy <= vr.y + vr.h) {
+          window.open(window.MBL_VERSION.url, '_blank');
+          return;
+        }
+      }
+      if (game.state !== 'playing') newGame(game.width, game.height);
+    }
   });
 
   function drainEvents() {
