@@ -5,7 +5,8 @@ set -euo pipefail
 
 HASH=$(git rev-parse HEAD 2>/dev/null || echo "00000000")
 SHORT="${HASH:0:4}"
-DATE=$(date +"%Y.%m.%d-%H.%M")
+# Pinned to Oslo local time (CEST in summer / CET in winter).
+DATE=$(TZ=Europe/Oslo date +"%Y.%m.%d-%H.%M")
 VERSION="${DATE}+${SHORT}"
 COMMIT_URL="https://github.com/only1thor/monster-ball-launcher/commit/${HASH}"
 
