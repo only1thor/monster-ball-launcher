@@ -26,10 +26,10 @@
     drawAttackSector(ctx, g);
     drawPlayer(ctx, g);
     drawHud(ctx, g);
-    drawVersion(ctx, g);
     drawParticles(ctx, fx.particles);
 
     if (g.state !== 'playing') drawOverlay(ctx, g);
+    drawVersion(ctx, g);   // on top of everything, always visible
   }
 
   // Bounding rect (in canvas logical coords) of the last-drawn version label.
