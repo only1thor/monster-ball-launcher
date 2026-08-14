@@ -147,8 +147,8 @@
       const my = clamp(input.moveY ?? 0, -1, 1);
       const mag = Math.hypot(mx, my);
       if (mag > 0.05) {
-        p.x += (mx / mag) * t.playerMaxSpeed * dt;
-        p.y += (my / mag) * t.playerMaxSpeed * dt;
+        p.x += mx * t.playerMaxSpeed * dt;
+        p.y += my * t.playerMaxSpeed * dt;
         p.faceX = mx / mag;
         p.faceY = my / mag;
       }
